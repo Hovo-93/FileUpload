@@ -18,6 +18,9 @@ from django.urls import path,include
 from drf_yasg.openapi import Info, Contact, License
 from drf_yasg.views import get_schema_view
 from rest_framework.permissions import AllowAny
+from django.conf.urls.static import static
+
+from . import settings
 
 schema_view = get_schema_view(
     Info(
@@ -35,4 +38,4 @@ urlpatterns = [
     path('swagger/', schema_view.with_ui()),
     path('', include('uploads.urls')),
     path('api-auth/', include('rest_framework.urls')),
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
